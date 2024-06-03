@@ -1,0 +1,30 @@
+---
+server:
+  port: ${UNIVERSITY_SERVICE_PORT:8082}
+
+spring:
+  application:
+    name: university-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: tgr
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/mydatabase}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    ddl-auto: create
+eureka:
+  client:
+    prefer-same-zone-eureka: true
+    healthcheck:
+      enabled: true
+    instance-info-replication-interval-seconds: 2
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URI:http://localhost:8181/eureka/}
+  instance:
+    prefer-ip-address= true
