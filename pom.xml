@@ -17,7 +17,7 @@
     <description>store-version3</description>
 
     <modules>
-        <module>product-service</module>
+        <module>pet-product-service</module>
         <module>pet-order-service</module>
         <module>pet-inventory-service</module>
         <module>discovery-server</module>

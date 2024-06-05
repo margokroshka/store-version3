@@ -14,7 +14,7 @@
     <name>pet-inventiry-service</name>
     <description>pet-inventiry-service</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
