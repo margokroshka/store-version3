@@ -16,4 +16,7 @@ public class UserRequest {
     private String username;
     private String email;
 
+    public UserRequest(String username, String email) {
+
+    }
 }

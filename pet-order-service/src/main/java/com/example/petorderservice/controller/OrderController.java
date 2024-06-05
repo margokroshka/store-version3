@@ -26,22 +26,13 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-   /* @PostMapping("/create")
-    public ResponseEntity<Order> createOrder(@RequestBody List<OrderLineItems> orderLineItemsList) {
-        try {
-            Order order = orderService.createOrder(orderLineItemsList);
-            return new ResponseEntity<>(order, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }*/
+
     @GetMapping("/getAll")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
-    // Получение заказа по ID
     @GetMapping("/getId/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Integer id) {
         Order order = orderService.getOrderById(id);
@@ -52,18 +43,6 @@ public class OrderController {
         }
     }
 
- /*   // Обновление заказа
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @RequestBody List<OrderLineItems> orderLineItemsList) {
-        try {
-            Order updatedOrder = orderService.updateOrder(id, orderLineItemsList);
-            return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
-    }*/
-
-    // Удаление заказа
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Integer id) {
         boolean isDeleted = orderService.deleteOrder(id);
