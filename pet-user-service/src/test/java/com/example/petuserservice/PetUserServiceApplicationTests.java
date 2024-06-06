@@ -32,28 +32,28 @@ class UserControllerTest {
 
     @Test
     void testRegisterUser_Success() {
-        // Arrange
         UserRequest userRequest = new UserRequest("Margo", "email");
+
         UserRepresentation userRepresentation = new UserRepresentation();
         userRepresentation.setUsername(userRequest.getUsername());
         userRepresentation.setEmail(userRequest.getEmail());
         userRepresentation.setEnabled(true);
+
         ResponseEntity<String> response = userController.registerUser(userRequest);
+
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("User registered successfully", response.getBody());
+
         verify(keycloak.realm("your-realm").users(), times(1)).create(userRepresentation);
     }
 
     @Test
     void testRegisterUser_Failure() {
-        // Arrange
-        UserRequest userRequest = new UserRequest("username", "email");
+        UserRequest userRequest = new UserRequest("Margarita", "email123");
         doThrow(new RuntimeException("Failed to create user")).when(keycloak.realm("your-realm").users()).create(any(UserRepresentation.class));
 
-        // Act
         ResponseEntity<String> response = userController.registerUser(userRequest);
 
-        // Assert
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
         assertEquals("Failed to register user: Failed to create user", response.getBody());
     }
