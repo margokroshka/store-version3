@@ -31,10 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
-/data/
-/grafana/
-/mongo-data/
-/mysql_keycloak_data/
-/prometheus/
-/realms/
+
+
+
 /product-service/
