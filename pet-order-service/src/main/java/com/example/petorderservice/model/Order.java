@@ -19,6 +19,6 @@ import java.util.List;
 @Table(name="orders")
 public class Order {
     @Id
-    private Integer id;
+    private Long id;
     private String order_number;
 }
