@@ -27,7 +27,6 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-    // Создание нового элемента склада
     @PostMapping("/create")
     public ResponseEntity<Inventory> createInventory(@RequestBody Inventory inventory) {
         try {
@@ -38,14 +37,12 @@ public class InventoryController {
         }
     }
 
-    // Получение всех элементов склада
     @GetMapping("/getAll")
     public ResponseEntity<List<Inventory>> getAllInventory() {
         List<Inventory> inventoryList = inventoryService.getAllInventory();
         return new ResponseEntity<>(inventoryList, HttpStatus.OK);
     }
 
-    // Получение элемента склада по ID
     @GetMapping("/getId/{id}")
     public ResponseEntity<Inventory> getInventoryById(@PathVariable Long id) {
         Inventory inventory = inventoryService.getInventoryById(id);
@@ -56,7 +53,6 @@ public class InventoryController {
         }
     }
 
-    // Обновление элемента склада
     @PutMapping("/update/{id}")
     public ResponseEntity<Inventory> updateInventory(@PathVariable Long id, @RequestBody Inventory inventoryDetails) {
         try {
@@ -67,7 +63,6 @@ public class InventoryController {
         }
     }
 
-    // Удаление элемента склада
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteInventory(@PathVariable Long id) {
         boolean isDeleted = inventoryService.deleteInventory(id);
@@ -78,7 +73,6 @@ public class InventoryController {
         }
     }
 
-    // Проверка наличия продукта по SKU
     @GetMapping("/check/{skuCode}")
     public ResponseEntity<Boolean> isProductInStock(@PathVariable String skuCode) {
         boolean isInStock = inventoryService.isProductInStock(skuCode);
