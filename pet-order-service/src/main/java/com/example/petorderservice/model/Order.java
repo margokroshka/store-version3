@@ -21,6 +21,4 @@ public class Order {
     @Id
     private Integer id;
     private String order_number;
-    /*@OneToMany(cascade = CascadeType.ALL)
-    private  List<OrderLineItems> order_line_items_list;*/
 }
