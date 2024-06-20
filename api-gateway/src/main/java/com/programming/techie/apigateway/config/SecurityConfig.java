@@ -11,16 +11,21 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
+   
     @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        serverHttpSecurity
-                .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exchange ->
-                        exchange.pathMatchers("/eureka/**")
-                                .permitAll()
-                                .anyExchange()
-                                .authenticated())
-                .oauth2ResourceServer(spec -> spec.jwt(Customizer.withDefaults()));
-        return serverHttpSecurity.build();
+    public DefaultSecurityFilterChain springSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/eurika/**").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin(formLogin -> formLogin
+                        .permitAll()
+                )
+                .csrf(csrf -> csrf
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                );
+
+        return httpSecurity.build();
     }
 }
