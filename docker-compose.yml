@@ -45,7 +45,7 @@ services:
     container_name: keycloak-postgres
     image: postgres:15
     environment:
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
@@ -57,9 +57,10 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://keycloak-postgres:5432/postgres
-      KC_DB_USERNAME: keycloak
-      KC_DB_PASSWORD: password
+      KC_DB_URL: jdbc:postgresql://my_postgres_inventory:5432/postgres
+
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
     ports:
       - "9090:8080"
     volumes:

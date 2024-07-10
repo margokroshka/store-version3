@@ -2,25 +2,26 @@ package com.programming.techie.apigateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
-@EnableWebFluxSecurity
+@EnableWebSecurity
 public class SecurityConfig {
 
-   
     @Bean
-    public DefaultSecurityFilterChain springSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain customSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/eurika/**").permitAll()
+                        .requestMatchers("/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(formLogin -> formLogin
-                        .permitAll()
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll
                 )
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
